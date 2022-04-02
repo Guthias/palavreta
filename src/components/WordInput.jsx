@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { FaPlay } from 'react-icons/fa';
 import { BsTrashFill } from 'react-icons/bs';
+import wordlist from '../data/wordlist';
 
 const Div = styled.div`
   display: flex;
@@ -15,6 +16,7 @@ const Input = styled.input`
   font-size: 1.5em;
   padding: 5px;
   width: 200px;
+  font-weight: 700;
   text-align: center;
 `;
 
@@ -28,14 +30,34 @@ const Button = styled.button`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  
+  :disabled {
+    background-color: #bbb
+  }
 `;
 
 export default function WordInput() {
+  const [wordInput, setWordInput] = useState('');
+  const [isValidWord, setIsValidWord] = useState(false);
+
+  const changeWordInput = ({ target }) => {
+    if (target.value.length <= 5) {
+      setWordInput(target.value.toUpperCase());
+    }
+  };
+
+  useEffect(() => {
+    const verifyValidWord = () => {
+      setIsValidWord(wordlist.includes(wordInput.toLowerCase()));
+    };
+    verifyValidWord();
+  }, [wordInput]);
+
   return (
     <Div>
-      <Input type="text" />
+      <Input type="text" value={wordInput} onChange={changeWordInput} />
 
-      <Button color="#4EA060">
+      <Button color="#4EA060" disabled={!isValidWord}>
         <FaPlay />
       </Button>
 
