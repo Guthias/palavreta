@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import useWords from '../hooks/useWords';
 import BoardRow from './BoardRow';
 
 const Board = styled.div`
@@ -10,6 +11,16 @@ const Board = styled.div`
 `;
 
 export default function WordBoard() {
+  const { wordlist, setRandomWord } = useWords();
+
+  useEffect(() => {
+    const createRandomWord = () => {
+      const RANDOM_INDEX = Math.round(Math.random() * wordlist.length);
+      setRandomWord(wordlist[RANDOM_INDEX]);
+    };
+    createRandomWord();
+  }, []);
+
   return (
     <Board>
       <BoardRow />
