@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import WordBoard from './components/WordBoard';
 import WordInput from './components/WordInput';
+import WordsProvider from './context/WordsProvider';
 
 const Div = styled.div`
   background-color: #191919;
@@ -15,10 +16,12 @@ const Div = styled.div`
 
 function App() {
   return (
-    <Div>
-      <WordBoard />
-      <WordInput />
-    </Div>
+    <WordsProvider>
+      <Div>
+        <WordBoard />
+        <WordInput />
+      </Div>
+    </WordsProvider>
   );
 }
 

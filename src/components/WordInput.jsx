@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { FaPlay } from 'react-icons/fa';
 import { BsTrashFill } from 'react-icons/bs';
-import wordlist from '../data/wordlist';
+import useWords from '../hooks/useWords';
 
 const Div = styled.div`
   display: flex;
@@ -39,6 +39,7 @@ const Button = styled.button`
 export default function WordInput() {
   const [wordInput, setWordInput] = useState('');
   const [isValidWord, setIsValidWord] = useState(false);
+  const { wordlist } = useWords();
 
   const changeWordInput = ({ target }) => {
     if (target.value.length <= 5) {
