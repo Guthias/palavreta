@@ -1,7 +1,8 @@
-import { string } from 'prop-types';
-import { nanoid } from 'nanoid';
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { nanoid } from 'nanoid';
+import { string } from 'prop-types';
+import useWords from '../hooks/useWords';
 
 const Row = styled.div`
   display: flex;
@@ -10,7 +11,6 @@ const Row = styled.div`
 `;
 
 const Cell = styled.div`
-  background-color: white;
   width: 50px;
   height: 50px;
   font-size: 38px;
@@ -19,20 +19,71 @@ const Cell = styled.div`
   justify-content: center;
   align-items: center;
   user-select: none;
+  text-transform: uppercase;
+
+  ${({ status }) => {
+    switch (status) {
+      case 'incorrect':
+        return css`
+          background-color: red;
+          color: black;
+        `;
+
+      case 'present':
+        return css`
+          background-color: #eed70b;
+          color: black;
+        `;
+
+      case 'correct':
+        return css`
+          background-color: green;
+          color: white;
+        `;
+      default:
+        return css`
+          background-color: white;
+          color: black;
+        `;
+    }
+  }}
 `;
 
 export default function BoardRow({ word }) {
   const WORD_LENGTH = 5;
-
+  const { randomWord } = useWords();
   const wordChars = word?.split('')
     || Array.from(Array(WORD_LENGTH), () => '');
+
+  const wordCharsClone = [...wordChars];
+
+  const charStatus = wordChars.map((char, index) => {
+    let status;
+
+    if (char === '') {
+      status = 'blank';
+    } else if (char === randomWord?.split('')[index]) {
+      wordCharsClone.splice(char, 1);
+      status = 'correct';
+    } else if (randomWord?.includes(char)) {
+      wordCharsClone.splice(char, 1);
+      status = 'present';
+    } else {
+      status = 'incorrect';
+    }
+
+    return {
+      char,
+      status,
+    };
+  });
 
   return (
     <Row>
       {
-        wordChars.map((letter) => (
-          <Cell key={nanoid()}>
-            { letter }
+        charStatus.map(({ char, status }) => (
+          <Cell key={nanoid()} status={status}>
+            { char }
           </Cell>
         ))
       }

@@ -7,7 +7,7 @@ export default function useWords() {
   } = useContext(WordsContext);
 
   const tryNewWord = (word) => {
-    setWordTries([...wordTries, word]);
+    setWordTries([...wordTries, word.toLowerCase()]);
   };
 
   const getTriedWord = (index) => wordTries[index];
