@@ -20,30 +20,21 @@ const Cell = styled.div`
   align-items: center;
   user-select: none;
   text-transform: uppercase;
+  color: black;
 
   ${({ status }) => {
     switch (status) {
-      case 'incorrect':
-        return css`
-          background-color: red;
-          color: black;
-        `;
-
       case 'present':
         return css`
-          background-color: #eed70b;
-          color: black;
+          background-color: #E3D235;
         `;
-
       case 'correct':
         return css`
-          background-color: green;
-          color: white;
+          background-color: #80DC54;
         `;
       default:
         return css`
           background-color: white;
-          color: black;
         `;
     }
   }}
