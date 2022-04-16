@@ -39,12 +39,17 @@ const Button = styled.button`
 export default function WordInput() {
   const [wordInput, setWordInput] = useState('');
   const [isValidWord, setIsValidWord] = useState(false);
-  const { wordlist } = useWords();
+  const { wordlist, tryNewWord } = useWords();
 
   const changeWordInput = ({ target }) => {
     if (target.value.length <= 5) {
       setWordInput(target.value.toUpperCase());
     }
+  };
+
+  const tryButton = (event) => {
+    event.preventDefault();
+    tryNewWord(wordInput);
   };
 
   useEffect(() => {
@@ -58,7 +63,7 @@ export default function WordInput() {
     <Div>
       <Input type="text" value={wordInput} onChange={changeWordInput} />
 
-      <Button color="#4EA060" disabled={!isValidWord}>
+      <Button color="#4EA060" disabled={!isValidWord} type="submit" onClick={tryButton}>
         <FaPlay />
       </Button>
 

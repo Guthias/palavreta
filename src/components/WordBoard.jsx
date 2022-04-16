@@ -11,7 +11,8 @@ const Board = styled.div`
 `;
 
 export default function WordBoard() {
-  const { wordlist, setRandomWord } = useWords();
+  const { wordlist, setRandomWord, getTriedWord } = useWords();
+  const NUMBER_OF_TRIES = 6;
 
   useEffect(() => {
     const createRandomWord = () => {
@@ -23,12 +24,11 @@ export default function WordBoard() {
 
   return (
     <Board>
-      <BoardRow />
-      <BoardRow />
-      <BoardRow />
-      <BoardRow />
-      <BoardRow />
-      <BoardRow />
+      {
+        Array.from(Array(NUMBER_OF_TRIES).keys()).map((_, index) => (
+          <BoardRow word={getTriedWord(index)} />
+        ))
+      }
     </Board>
   );
 }

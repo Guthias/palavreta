@@ -1,3 +1,4 @@
+import { string } from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -19,14 +20,24 @@ const Cell = styled.div`
   user-select: none;
 `;
 
-export default function BoardRow() {
+export default function BoardRow({ word }) {
   return (
     <Row>
-      <Cell />
-      <Cell />
-      <Cell />
-      <Cell />
-      <Cell />
+      {
+        word.split('').map((letter) => (
+          <Cell>
+            { letter }
+          </Cell>
+        ))
+      }
     </Row>
   );
 }
+
+BoardRow.defaultProps = {
+  word: '     ',
+};
+
+BoardRow.propTypes = {
+  word: string,
+};

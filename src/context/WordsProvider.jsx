@@ -7,10 +7,11 @@ export const WordsContext = createContext();
 export default function WordsProvider({ children }) {
   const [wordlist, setWordlist] = useState([...wordList]);
   const [randomWord, setRandomWord] = useState();
+  const [wordTries, setWordTries] = useState([]);
 
   const providerValues = useMemo(() => (
     {
-      wordlist, setWordlist, randomWord, setRandomWord,
+      wordlist, setWordlist, randomWord, setRandomWord, wordTries, setWordTries,
     }
   ));
 
