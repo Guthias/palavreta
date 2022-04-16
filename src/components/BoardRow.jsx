@@ -1,4 +1,5 @@
 import { string } from 'prop-types';
+import { nanoid } from 'nanoid';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -30,7 +31,7 @@ export default function BoardRow({ word }) {
     <Row>
       {
         wordChars.map((letter) => (
-          <Cell>
+          <Cell key={nanoid()}>
             { letter }
           </Cell>
         ))

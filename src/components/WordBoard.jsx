@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { nanoid } from 'nanoid';
 import styled from 'styled-components';
 import useWords from '../hooks/useWords';
 import BoardRow from './BoardRow';
@@ -26,7 +27,7 @@ export default function WordBoard() {
     <Board>
       {
         Array.from(Array(NUMBER_OF_TRIES).keys()).map((_, index) => (
-          <BoardRow word={getTriedWord(index)} />
+          <BoardRow word={getTriedWord(index)} key={nanoid()} />
         ))
       }
     </Board>
