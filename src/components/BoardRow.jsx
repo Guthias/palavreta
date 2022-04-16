@@ -21,10 +21,15 @@ const Cell = styled.div`
 `;
 
 export default function BoardRow({ word }) {
+  const WORD_LENGTH = 5;
+
+  const wordChars = word?.split('')
+    || Array.from(Array(WORD_LENGTH), () => '');
+
   return (
     <Row>
       {
-        word.split('').map((letter) => (
+        wordChars.map((letter) => (
           <Cell>
             { letter }
           </Cell>
@@ -35,7 +40,7 @@ export default function BoardRow({ word }) {
 }
 
 BoardRow.defaultProps = {
-  word: '     ',
+  word: undefined,
 };
 
 BoardRow.propTypes = {
