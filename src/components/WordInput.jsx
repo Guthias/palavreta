@@ -4,7 +4,7 @@ import { FaPlay } from 'react-icons/fa';
 import { BsTrashFill } from 'react-icons/bs';
 import useWords from '../hooks/useWords';
 
-const Div = styled.div`
+const Div = styled.form`
   display: flex;
   flex-direction: row;
   gap: 5px;
