@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import { nanoid } from 'nanoid';
 import { string } from 'prop-types';
 import useWords from '../hooks/useWords';
+import verifyWords from '../helpers/verifyWords';
 
 const Row = styled.div`
   display: flex;
@@ -44,35 +45,14 @@ export default function BoardRow({ word }) {
   const WORD_LENGTH = 5;
   const { randomWord } = useWords();
   const wordChars = word?.split('')
-    || Array.from(Array(WORD_LENGTH), () => '');
+    || Array.from(Array(WORD_LENGTH), () => ' ');
 
-  const wordCharsClone = [...wordChars];
-
-  const charStatus = wordChars.map((char, index) => {
-    let status;
-
-    if (char === '') {
-      status = 'blank';
-    } else if (char === randomWord?.split('')[index]) {
-      wordCharsClone.splice(char, 1);
-      status = 'correct';
-    } else if (randomWord?.includes(char)) {
-      wordCharsClone.splice(char, 1);
-      status = 'present';
-    } else {
-      status = 'incorrect';
-    }
-
-    return {
-      char,
-      status,
-    };
-  });
+  const charStatus = verifyWords(randomWord?.split(''), wordChars);
 
   return (
     <Row>
       {
-        charStatus.map(({ char, status }) => (
+        charStatus?.map(({ char, status }) => (
           <Cell key={nanoid()} status={status}>
             { char }
           </Cell>
