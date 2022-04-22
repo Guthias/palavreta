@@ -31,27 +31,25 @@ describe('Alghoritm for verify Words', () => {
 
   it('Should work as expected when tried word is \'FOLHA\' and tried word is \'VENTO\'', () => {
     const result = verifyWords('FOLHA', 'VENTO');
-    expect(result).toMatchObject(
-      {
-        char: 'F',
-        status: 'wrong',
-      },
-      {
-        char: 'O',
-        status: 'present',
-      },
-      {
-        char: 'L',
-        status: 'wrong',
-      },
-      {
-        char: 'H',
-        status: 'wrong',
-      },
-      {
-        char: 'A',
-        status: 'wrong',
-      },
-    )
+    expect(result).toMatchObject([{
+      char: 'F',
+      status: 'wrong',
+    },
+    {
+      char: 'O',
+      status: 'present',
+    },
+    {
+      char: 'L',
+      status: 'wrong',
+    },
+    {
+      char: 'H',
+      status: 'wrong',
+    },
+    {
+      char: 'A',
+      status: 'wrong',
+    }])
   })
 });
