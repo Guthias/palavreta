@@ -29,7 +29,7 @@ describe('Alghoritm for verify Words', () => {
     )
   });
 
-  it('Should work as expected when tried word is \'FOLHA\' and tried word is \'VENTO\'', () => {
+  it('Should work as expected when tried word is \'FOLHA\' and correct word is \'VENTO\'', () => {
     const result = verifyWords('FOLHA', 'VENTO');
     expect(result).toMatchObject([{
       char: 'F',
@@ -53,7 +53,7 @@ describe('Alghoritm for verify Words', () => {
     }])
   });
 
-  it('Shoudl work as expected when tried word is \'FALHA\' and correct word is \'FOLHA\'', () => {
+  it('Should work as expected when tried word is \'FALHA\' and correct word is \'FOLHA\'', () => {
     const result = verifyWords('FALHA', 'FOLHA');
     expect(result).toMatchObject([{
       char: 'F',
