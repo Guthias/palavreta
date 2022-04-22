@@ -76,4 +76,14 @@ describe('Alghoritm for verify Words', () => {
       status: 'correct',
     }])
   });
+
+  it('Should return a array with empty chars and status as blank when tried word is undefined' , () => {
+    const result = verifyWords(undefined, 'TESTE');
+    const WORD_LENGTH = 5;
+    expect(
+      result.every(({ char, status }) => char === '' && status === 'blank')
+    ).toBe(true);
+
+    expect(result.length).toBe(WORD_LENGTH);
+  })
 });
