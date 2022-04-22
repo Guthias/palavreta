@@ -1,9 +1,9 @@
 export default function verifyWords(triedWord, correctWord) {
   const triedChars = triedWord?.split('');
-  const correctChars = correctWord.split('');
+  const correctChars = correctWord?.split('');
 
   if (!triedWord) {
-    return correctChars.map(() => ({
+    return correctChars?.map(() => ({
       char: '',
       status: 'blank',
     }));

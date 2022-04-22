@@ -42,12 +42,9 @@ const Cell = styled.div`
 `;
 
 export default function BoardRow({ word }) {
-  const WORD_LENGTH = 5;
   const { randomWord } = useWords();
-  const wordChars = word?.split('')
-    || Array.from(Array(WORD_LENGTH), () => ' ');
 
-  const charStatus = verifyWords(randomWord?.split(''), wordChars);
+  const charStatus = verifyWords(word, randomWord);
 
   return (
     <Row>
