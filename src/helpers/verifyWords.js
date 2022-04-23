@@ -20,8 +20,14 @@ export default function verifyWords(triedWord, correctWord) {
     return { char, status };
   });
 
-  return wordStatus.map(({ char, status }) => ({
-    char,
-    status: correctChars.includes(char) ? 'present' : status,
-  }));
+  return wordStatus.map(({ char, status }) => {
+    let charStatus = status;
+    if (correctChars.includes(char)) {
+      charStatus = 'present';
+      const correctCharIndex = correctChars.indexOf(char);
+      correctChars[correctCharIndex] = ' ';
+    }
+
+    return { char, status: charStatus };
+  });
 }
