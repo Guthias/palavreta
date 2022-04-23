@@ -85,5 +85,29 @@ describe('Alghoritm for verify Words', () => {
     ).toBe(true);
 
     expect(result.length).toBe(WORD_LENGTH);
-  })
+  });
+
+  it('Should work as expected when tried word is \'VACAS\' and correct word is \'BOATO\'', () => {
+    const result = verifyWords('VACAS', 'BOATO');
+    expect(result).toMatchObject([{
+      char: 'V',
+      status: 'wrong',
+    },
+    {
+      char: 'A',
+      status: 'present',
+    },
+    {
+      char: 'C',
+      status: 'wrong',
+    },
+    {
+      char: 'A',
+      status: 'wrong',
+    },
+    {
+      char: 'S',
+      status: 'wrong',
+    }])
+  });
 });
