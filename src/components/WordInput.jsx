@@ -57,9 +57,11 @@ export default function WordInput() {
 
   useEffect(() => {
     const verifyValidWord = () => {
-      if (wordInput.length !== WORD_LENGTH) return;
-      const correctWord = spellChecker(wordInput);
-      setIsValidWord(correctWord);
+      if (wordInput.length === WORD_LENGTH) {
+        setIsValidWord(spellChecker(wordInput));
+      } else {
+        setIsValidWord(false);
+      }
     };
     verifyValidWord();
   }, [wordInput]);
