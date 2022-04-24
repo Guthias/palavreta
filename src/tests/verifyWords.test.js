@@ -110,4 +110,28 @@ describe('Alghoritm for verify Words', () => {
       status: 'wrong',
     }])
   });
+
+  it('Should work as expected when tried word is \'PERNA\' and correct word is \'PARDA\'', () => {
+    const result = verifyWords('PERNA', 'PARDA');
+    expect(result).toMatchObject([{
+      char: 'P',
+      status: 'correct',
+    },
+    {
+      char: 'E',
+      status: 'wrong',
+    },
+    {
+      char: 'R',
+      status: 'correct',
+    },
+    {
+      char: 'N',
+      status: 'wrong',
+    },
+    {
+      char: 'A',
+      status: 'correct',
+    }])
+  });
 });
