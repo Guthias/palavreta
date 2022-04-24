@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { FaPlay } from 'react-icons/fa';
-import { BsTrashFill } from 'react-icons/bs';
 import useWords from '../hooks/useWords';
 
 const Div = styled.form`
   display: flex;
   flex-direction: row;
   gap: 5px;
+  width: 290px;
 `;
 
 const Input = styled.input`
@@ -16,13 +16,14 @@ const Input = styled.input`
   font-size: 1.5em;
   padding: 5px;
   width: 200px;
+  width: 100%;
   font-weight: 700;
   text-align: center;
 `;
 
 const Button = styled.button`
   background-color: ${({ color }) => color};
-  width: 50px;
+  width: 70px;
   border: none;
   color: white;
   font-size: 22px;
@@ -50,6 +51,7 @@ export default function WordInput() {
   const tryButton = (event) => {
     event.preventDefault();
     tryNewWord(wordInput);
+    setWordInput('');
   };
 
   useEffect(() => {
@@ -65,10 +67,6 @@ export default function WordInput() {
 
       <Button color="#4EA060" disabled={!isValidWord} type="submit" onClick={tryButton}>
         <FaPlay />
-      </Button>
-
-      <Button color="#D84747">
-        <BsTrashFill />
       </Button>
     </Div>
   );
