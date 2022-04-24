@@ -134,4 +134,28 @@ describe('Alghoritm for verify Words', () => {
       status: 'correct',
     }])
   });
+
+  it('Should work as expected when tried word be accentued and correct not', () => {
+    const result = verifyWords('UNIÃO', 'CANAL');
+    expect(result).toMatchObject([{
+      char: 'U',
+      status: 'wrong',
+    },
+    {
+      char: 'N',
+      status: 'present',
+    },
+    {
+      char: 'I',
+      status: 'wrong',
+    },
+    {
+      char: 'Ã',
+      status: 'correct',
+    },
+    {
+      char: 'O',
+      status: 'wrong',
+    }])
+  });
 });
