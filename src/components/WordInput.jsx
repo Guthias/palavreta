@@ -40,7 +40,8 @@ const Button = styled.button`
 export default function WordInput() {
   const [wordInput, setWordInput] = useState('');
   const [isValidWord, setIsValidWord] = useState(false);
-  const { wordlist, tryNewWord } = useWords();
+  const { tryNewWord, spellChecker } = useWords();
+  const WORD_LENGTH = 5;
 
   const changeWordInput = ({ target }) => {
     if (target.value.length <= 5) {
@@ -56,7 +57,9 @@ export default function WordInput() {
 
   useEffect(() => {
     const verifyValidWord = () => {
-      setIsValidWord(wordlist.includes(wordInput.toLowerCase()));
+      if (wordInput.length !== WORD_LENGTH) return;
+      const correctWord = spellChecker(wordInput);
+      setIsValidWord(correctWord);
     };
     verifyValidWord();
   }, [wordInput]);
