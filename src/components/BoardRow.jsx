@@ -33,6 +33,11 @@ const Cell = styled.div`
         return css`
           background-color: #80DC54;
         `;
+      case 'wrong':
+        return css`
+          background-color: #707070;
+          color: white;
+        `;
       default:
         return css`
           background-color: white;
