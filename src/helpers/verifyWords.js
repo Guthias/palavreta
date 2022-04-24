@@ -22,10 +22,11 @@ export default function verifyWords(triedWord, correctWord) {
 
   return wordStatus.map(({ char, status }) => {
     let charStatus = status;
-    if (correctChars.includes(char)) {
+    const charPosition = correctChars.indexOf(char);
+
+    if (charPosition !== -1 && status !== 'correct') {
       charStatus = 'present';
-      const correctCharIndex = correctChars.indexOf(char);
-      correctChars[correctCharIndex] = ' ';
+      correctChars.splice(charPosition, 1);
     }
 
     return { char, status: charStatus };
