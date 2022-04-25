@@ -9,6 +9,7 @@ export default function useWords() {
   const spellChecker = (word) => {
     const regexRules = {
       a: '[a, á, ã, à, â]',
+      c: '[c, ç]',
       e: '[e, é, ê, è]',
       i: '[i, í, ì, î]',
       o: '[o, ó, ô, ò, ô]',
@@ -17,10 +18,10 @@ export default function useWords() {
     let wordRegex = word.toLowerCase();
 
     Object.keys(regexRules).forEach((key) => {
-      wordRegex = wordRegex.replace(key, regexRules[key]);
+      wordRegex = wordRegex.replace(RegExp(key, 'g'), regexRules[key]);
     });
 
-    wordRegex = RegExp(wordRegex);
+    wordRegex = RegExp(wordRegex, 'm');
 
     return wordlist.find((correctWord) => correctWord.match(wordRegex));
   };

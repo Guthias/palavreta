@@ -2,6 +2,7 @@ const removeSpecialChars = (word) => {
   if (!word) return undefined;
   const regexRules = {
     a: '[a, á, ã, à, â]',
+    c: '[ç]',
     e: '[e, é, ê, è]',
     i: '[i, í, ì, î]',
     o: '[o, ó, ô, ò, ô]',
