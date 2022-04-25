@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { MdLeaderboard } from 'react-icons/md';
 
 const HeaderArea = styled.div`
   font-size: 22px;
@@ -18,10 +19,38 @@ const Title = styled.h1`
   margin: 0;
 `;
 
+const Column = styled.div`
+  display: flex;
+  justify-content: ${({ position }) => position};
+  width: 100%;
+  padding: 0 5em;
+`;
+
+const Button = styled.button`
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: white;
+  font-size: 1.2em;
+  display: flex;
+  align-items: center;
+`;
+
 export default function Header() {
   return (
     <HeaderArea>
-      <Title>Palavreta</Title>
+      <Column position="left" />
+
+      <Column position="center">
+        <Title>Palavreta</Title>
+      </Column>
+
+      <Column position="right">
+        <Button>
+          <MdLeaderboard />
+        </Button>
+      </Column>
+
     </HeaderArea>
   );
 }
