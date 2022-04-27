@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Ranking from './Ranking';
+import { useModal } from '../context/WordsProvider';
 
 const ModalArea = styled.div`
   position: fixed;
@@ -15,9 +16,17 @@ const ModalArea = styled.div`
 `;
 
 export default function Feedback() {
+  const { showModal, setShowModal } = useModal();
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
   return (
-    <ModalArea>
+    showModal && (
+    <ModalArea onClick={closeModal}>
       <Ranking />
     </ModalArea>
+    )
   );
 }

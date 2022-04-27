@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { MdLeaderboard } from 'react-icons/md';
+import { useModal } from '../context/WordsProvider';
 
 const HeaderArea = styled.div`
   font-size: 22px;
@@ -37,6 +38,12 @@ const Button = styled.button`
 `;
 
 export default function Header() {
+  const { setShowModal } = useModal();
+
+  const showRanking = () => {
+    setShowModal(true);
+  };
+
   return (
     <HeaderArea>
       <Column position="left" />
@@ -46,7 +53,7 @@ export default function Header() {
       </Column>
 
       <Column position="right">
-        <Button>
+        <Button onClick={showRanking}>
           <MdLeaderboard />
         </Button>
       </Column>

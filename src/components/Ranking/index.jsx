@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import RankingGraph from './RankingGraph';
 import RankingValues from './RankingValues';
 
-const FeedbackArea = styled.div`
+const RankingArea = styled.div`
   background-color: #2e2e2e;
   width: 40%;
   color: white;
@@ -23,10 +23,10 @@ const Title = styled.h2`
 
 export default function Ranking() {
   return (
-    <FeedbackArea>
+    <RankingArea onClick={(e) => e.stopPropagation()}>
       <Title>Ranking</Title>
       <RankingValues />
       <RankingGraph />
-    </FeedbackArea>
+    </RankingArea>
   );
 }
