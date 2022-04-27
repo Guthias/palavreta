@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Feedback from './components/Feedback';
+import ModalArea from './components/ModalArea';
 import Header from './components/Header';
 import WordBoard from './components/WordBoard';
 import WordsProvider from './context/WordsProvider';
@@ -23,7 +23,7 @@ function App() {
         <Header />
         <WordBoard />
       </PageContent>
-      <Feedback />
+      <ModalArea />
     </WordsProvider>
   );
 }
