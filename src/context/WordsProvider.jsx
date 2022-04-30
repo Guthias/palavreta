@@ -11,6 +11,7 @@ export default function WordsProvider({ children }) {
   const [randomWord, setRandomWord] = useState();
   const [wordTries, setWordTries] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [gameStatus, setGameStatus] = useState();
 
   const providerValues = useMemo(() => (
     {
@@ -22,6 +23,8 @@ export default function WordsProvider({ children }) {
       setWordTries,
       showModal,
       setShowModal,
+      gameStatus,
+      setGameStatus,
     }
   ));
 

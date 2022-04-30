@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { nanoid } from 'nanoid';
 import styled from 'styled-components';
 import useWords from '../hooks/useWords';
+import useGame from '../hooks/useGame';
 import BoardRow from './BoardRow';
 import WordInput from './WordInput';
 
@@ -20,16 +21,17 @@ const Board = styled.div`
 `;
 
 export default function WordBoard() {
-  const { wordlist, setRandomWord, getTriedWord } = useWords();
+  const { getTriedWord } = useWords();
+  const { startNewGame, wordTries, verifyGameStatus } = useGame();
   const NUMBER_OF_TRIES = 6;
 
   useEffect(() => {
-    const createRandomWord = () => {
-      const RANDOM_INDEX = Math.round(Math.random() * wordlist.length);
-      setRandomWord(wordlist[RANDOM_INDEX]);
-    };
-    createRandomWord();
+    startNewGame();
   }, []);
+
+  useEffect(() => {
+    verifyGameStatus();
+  }, [wordTries]);
 
   return (
     <BoardArea>
