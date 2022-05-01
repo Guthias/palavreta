@@ -3,7 +3,7 @@ import { WordsContext } from '../context/WordsProvider';
 
 export default function useWords() {
   const {
-    wordlist, setWordlist, randomWord, setRandomWord, wordTries, setWordTries,
+    wordlist, setWordlist, randomWord, setRandomWord, wordTries, setWordTries, gameStatus,
   } = useContext(WordsContext);
 
   const spellChecker = (word) => {
@@ -27,7 +27,7 @@ export default function useWords() {
   };
 
   const tryNewWord = (word) => {
-    setWordTries([...wordTries, spellChecker(word).toLowerCase()]);
+    if (gameStatus === 'in game') setWordTries([...wordTries, spellChecker(word).toLowerCase()]);
   };
 
   const getTriedWord = (index) => wordTries[index];
