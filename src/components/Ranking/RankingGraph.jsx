@@ -34,9 +34,9 @@ export default function RankingGraph() {
     } else {
       acc.lose += 1;
     }
-
+    acc.biggest = Math.max(...Object.values(acc));
     return acc;
-  }, { lose: 0 });
+  }, { lose: 0, biggest: 0 });
 
   const MAX_TRIES = 6;
   return (
@@ -45,7 +45,10 @@ export default function RankingGraph() {
         Array.from(Array(MAX_TRIES).keys()).map((_, index) => (
           <GraphRow key={nanoid()}>
             <GraphValue>{ index + 1}</GraphValue>
-            <RankingGraphBar value={triedAttempts[index + 1] || 0} />
+            <RankingGraphBar
+              value={triedAttempts[index + 1] || 0}
+              biggestValue={triedAttempts.biggest}
+            />
           </GraphRow>
         ))
       }
@@ -54,7 +57,10 @@ export default function RankingGraph() {
         <GraphValue>
           <FaSkull />
         </GraphValue>
-        <RankingGraphBar value={triedAttempts.lose} />
+        <RankingGraphBar
+          value={triedAttempts.lose}
+          biggestValue={triedAttempts.biggest}
+        />
       </GraphRow>
     </Graph>
   );
