@@ -36,6 +36,7 @@ export default function RankingValues() {
   const percentageOfWins = Math.round(
     (ranking.filter(({ win }) => win).length / playedGames) * 100,
   );
+
   const streak = ranking.reduce((acc, { win }) => {
     acc.actual = win ? acc.actual += 1 : 0;
     acc.best = acc.actual > acc.best ? acc.best = acc.actual : acc.best;
@@ -51,7 +52,7 @@ export default function RankingValues() {
       </ValueArea>
 
       <ValueArea>
-        <Value>{ `${percentageOfWins}%` }</Value>
+        <Value>{ `${percentageOfWins || 0}%` }</Value>
         <Description>de vitórias</Description>
       </ValueArea>
 
