@@ -3,7 +3,7 @@ import { WordsContext } from '../context/WordsProvider';
 
 export default function useGame() {
   const {
-    wordlist, setGameStatus, setRandomWord, setWordTries, wordTries, randomWord,
+    wordlist, setGameStatus, setRandomWord, setWordTries, wordTries, randomWord, gameStatus,
   } = useContext(WordsContext);
 
   const startNewGame = () => {
@@ -22,5 +22,11 @@ export default function useGame() {
     }
   };
 
-  return { startNewGame, verifyGameStatus, wordTries };
+  return {
+    startNewGame,
+    verifyGameStatus,
+    wordTries,
+    gameStatus,
+    randomWord,
+  };
 }
