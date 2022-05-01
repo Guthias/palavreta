@@ -2,6 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { number } from 'prop-types';
 
+const GraphBarArea = styled.div`
+  width: 100%;
+  position: relative;
+`;
+
 const GraphBar = styled.div`
   width: ${({ growPercentage }) => `${growPercentage}%`};
   min-width: 10%;
@@ -13,7 +18,9 @@ export default function RankingGraphBar({ value, biggestValue }) {
   const growPercentage = (value / biggestValue) * 100;
 
   return (
-    <GraphBar growPercentage={growPercentage}>{ value }</GraphBar>
+    <GraphBarArea>
+      <GraphBar growPercentage={growPercentage}>{ value }</GraphBar>
+    </GraphBarArea>
   );
 }
 
