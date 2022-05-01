@@ -10,6 +10,7 @@ export default function useRanking() {
     return {
       tries,
       numberOfTries: tries.length,
+      correctWord: randomWord,
       win: tries.includes(randomWord),
       date,
     };
