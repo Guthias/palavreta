@@ -22,5 +22,5 @@ export default function useRanking() {
     setRanking(newRanking);
   };
 
-  return { addValueOnRanking };
+  return { ranking, addValueOnRanking };
 }
