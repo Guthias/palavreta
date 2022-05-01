@@ -4,6 +4,7 @@ import ModalArea from './components/ModalArea';
 import Header from './components/Header';
 import WordBoard from './components/WordBoard';
 import WordsProvider from './context/WordsProvider';
+import Notification from './components/Notification';
 
 const PageContent = styled.div`
   background-color: #191919;
@@ -24,6 +25,7 @@ function App() {
         <WordBoard />
       </PageContent>
       <ModalArea />
+      <Notification />
     </WordsProvider>
   );
 }
