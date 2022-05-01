@@ -1,6 +1,8 @@
 import React from 'react';
 import { FaSkull } from 'react-icons/fa';
 import styled from 'styled-components';
+import { nanoid } from 'nanoid';
+import useRanking from '../../hooks/useRanking';
 import RankingGraphBar from './RankingGraphBar';
 
 const Graph = styled.div`
@@ -24,43 +26,35 @@ const GraphValue = styled.div`
 `;
 
 export default function RankingGraph() {
+  const { ranking } = useRanking();
+
+  const triedAttempts = ranking.reduce((acc, { numberOfTries, win }) => {
+    if (win) {
+      acc[numberOfTries] = acc[numberOfTries] !== undefined ? acc[numberOfTries] + 1 : 1;
+    } else {
+      acc.lose += 1;
+    }
+
+    return acc;
+  }, { lose: 0 });
+
+  const MAX_TRIES = 6;
   return (
     <Graph>
-      <GraphRow>
-        <GraphValue>1</GraphValue>
-        <RankingGraphBar value={0} />
-      </GraphRow>
-
-      <GraphRow>
-        <GraphValue>2</GraphValue>
-        <RankingGraphBar value={0} />
-      </GraphRow>
-
-      <GraphRow>
-        <GraphValue>3</GraphValue>
-        <RankingGraphBar value={0} />
-      </GraphRow>
-
-      <GraphRow>
-        <GraphValue>4</GraphValue>
-        <RankingGraphBar value={0} />
-      </GraphRow>
-
-      <GraphRow>
-        <GraphValue>5</GraphValue>
-        <RankingGraphBar value={0} />
-      </GraphRow>
-
-      <GraphRow>
-        <GraphValue>6</GraphValue>
-        <RankingGraphBar value={0} />
-      </GraphRow>
+      {
+        Array.from(Array(MAX_TRIES).keys()).map((_, index) => (
+          <GraphRow key={nanoid()}>
+            <GraphValue>{ index + 1}</GraphValue>
+            <RankingGraphBar value={triedAttempts[index + 1] || 0} />
+          </GraphRow>
+        ))
+      }
 
       <GraphRow>
         <GraphValue>
           <FaSkull />
         </GraphValue>
-        <RankingGraphBar value={0} />
+        <RankingGraphBar value={triedAttempts.lose} />
       </GraphRow>
     </Graph>
   );
