@@ -3,6 +3,7 @@ import React, {
 } from 'react';
 import { node } from 'prop-types';
 import wordList from '../data/wordlist';
+import { getLocalstoage } from '../helpers/localStorage';
 
 export const WordsContext = createContext();
 
@@ -12,6 +13,7 @@ export default function WordsProvider({ children }) {
   const [wordTries, setWordTries] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [gameStatus, setGameStatus] = useState();
+  const [ranking, setRanking] = useState(getLocalstoage('ranking') || []);
 
   const providerValues = useMemo(() => (
     {
@@ -25,6 +27,8 @@ export default function WordsProvider({ children }) {
       setShowModal,
       gameStatus,
       setGameStatus,
+      ranking,
+      setRanking,
     }
   ));
 
