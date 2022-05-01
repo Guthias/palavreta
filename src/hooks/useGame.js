@@ -13,18 +13,9 @@ export default function useGame() {
     setGameStatus('in game');
   };
 
-  const verifyGameStatus = () => {
-    const MAX_TRIES = 6;
-    if (wordTries.length === MAX_TRIES && wordTries[5] !== randomWord) {
-      setGameStatus('lose');
-    } else if (wordTries.includes(randomWord)) {
-      setGameStatus('win');
-    }
-  };
-
   return {
     startNewGame,
-    verifyGameStatus,
+    setGameStatus,
     wordTries,
     gameStatus,
     randomWord,

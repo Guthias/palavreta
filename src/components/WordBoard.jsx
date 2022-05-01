@@ -5,6 +5,7 @@ import useWords from '../hooks/useWords';
 import useGame from '../hooks/useGame';
 import BoardRow from './BoardRow';
 import WordInput from './WordInput';
+import useRanking from '../hooks/useRanking';
 
 const BoardArea = styled.div`
   display: flex;
@@ -21,15 +22,25 @@ const Board = styled.div`
 `;
 
 export default function WordBoard() {
-  const { getTriedWord } = useWords();
-  const { startNewGame, wordTries, verifyGameStatus } = useGame();
-  const NUMBER_OF_TRIES = 6;
+  const { getTriedWord, randomWord } = useWords();
+  const { startNewGame, wordTries, setGameStatus } = useGame();
+  const { addValueOnRanking } = useRanking();
+  const MAX_TRIES = 6;
 
   useEffect(() => {
     startNewGame();
   }, []);
 
   useEffect(() => {
+    const verifyGameStatus = () => {
+      if (wordTries.length === MAX_TRIES && wordTries[5] !== randomWord) {
+        addValueOnRanking(wordTries);
+        setGameStatus('lose');
+      } else if (wordTries.includes(randomWord)) {
+        addValueOnRanking(wordTries);
+        setGameStatus('win');
+      }
+    };
     verifyGameStatus();
   }, [wordTries]);
 
@@ -37,7 +48,7 @@ export default function WordBoard() {
     <BoardArea>
       <Board>
         {
-          Array.from(Array(NUMBER_OF_TRIES).keys()).map((_, index) => (
+          Array.from(Array(MAX_TRIES).keys()).map((_, index) => (
             <BoardRow word={getTriedWord(index)} key={nanoid()} />
           ))
         }
