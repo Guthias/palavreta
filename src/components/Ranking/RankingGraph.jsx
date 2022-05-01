@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaSkull } from 'react-icons/fa';
 import styled from 'styled-components';
+import RankingGraphBar from './RankingGraphBar';
 
 const Graph = styled.div`
   display: flex;
@@ -22,50 +23,44 @@ const GraphValue = styled.div`
   text-align: center;
 `;
 
-const GraphBar = styled.div`
-  width: 100%;
-  background-color: #4682F6;
-  padding-inline: 0.5em 1em;
-`;
-
 export default function RankingGraph() {
   return (
     <Graph>
       <GraphRow>
         <GraphValue>1</GraphValue>
-        <GraphBar>0</GraphBar>
+        <RankingGraphBar value={0} />
       </GraphRow>
 
       <GraphRow>
         <GraphValue>2</GraphValue>
-        <GraphBar>0</GraphBar>
+        <RankingGraphBar value={0} />
       </GraphRow>
 
       <GraphRow>
         <GraphValue>3</GraphValue>
-        <GraphBar>0</GraphBar>
+        <RankingGraphBar value={0} />
       </GraphRow>
 
       <GraphRow>
         <GraphValue>4</GraphValue>
-        <GraphBar>0</GraphBar>
+        <RankingGraphBar value={0} />
       </GraphRow>
 
       <GraphRow>
         <GraphValue>5</GraphValue>
-        <GraphBar>0</GraphBar>
+        <RankingGraphBar value={0} />
       </GraphRow>
 
       <GraphRow>
         <GraphValue>6</GraphValue>
-        <GraphBar>0</GraphBar>
+        <RankingGraphBar value={0} />
       </GraphRow>
 
       <GraphRow>
         <GraphValue>
           <FaSkull />
         </GraphValue>
-        <GraphBar>0</GraphBar>
+        <RankingGraphBar value={0} />
       </GraphRow>
     </Graph>
   );
