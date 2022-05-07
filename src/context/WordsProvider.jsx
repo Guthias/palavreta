@@ -1,7 +1,8 @@
 import React, {
-  createContext, useState, useMemo, useContext,
+  createContext, useState, useMemo, useContext, useReducer,
 } from 'react';
 import { node } from 'prop-types';
+import wordGameReducer from './wordGameReducer';
 import wordList from '../data/wordlist';
 import { getLocalstoage } from '../helpers/localStorage';
 
@@ -14,6 +15,15 @@ export default function WordsProvider({ children }) {
   const [showModal, setShowModal] = useState(false);
   const [gameStatus, setGameStatus] = useState();
   const [ranking, setRanking] = useState(getLocalstoage('ranking') || []);
+
+  const INITIAL_WORD_STORE = {
+    status: 'loading',
+    answer: undefined,
+    wordLength: 5,
+    tries: [],
+  };
+
+  const [wordGame, dispatch] = useReducer(wordGameReducer, INITIAL_WORD_STORE);
 
   const providerValues = useMemo(() => (
     {
@@ -29,6 +39,8 @@ export default function WordsProvider({ children }) {
       setGameStatus,
       ranking,
       setRanking,
+      wordGame,
+      dispatch,
     }
   ));
 
