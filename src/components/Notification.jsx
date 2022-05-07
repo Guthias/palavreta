@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import useGame from '../hooks/useGame';
+import useWordGame from '../hooks/useWordGame';
 
 const NotificationArea = styled.div`
   top: 20%;
@@ -15,11 +15,11 @@ const NotificationArea = styled.div`
 `;
 
 export default function Notification() {
-  const { gameStatus, randomWord } = useGame();
-  const loseMessage = `A palavra era ${randomWord?.toUpperCase()}`;
+  const { wordGame: { gameStatus, answer } } = useWordGame();
+  const loseMessage = `A palavra era ${answer?.toUpperCase()}`;
 
   return (
-    gameStatus !== 'in game' && (
+    gameStatus !== 'loading' && (
       <NotificationArea>
         {
           gameStatus === 'win' ? 'Você ganhou' : loseMessage

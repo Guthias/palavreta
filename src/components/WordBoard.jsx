@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import { nanoid } from 'nanoid';
 import styled from 'styled-components';
 import useWords from '../hooks/useWords';
-import useGame from '../hooks/useGame';
 import BoardRow from './BoardRow';
 import WordInput from './WordInput';
 import useRanking from '../hooks/useRanking';
+import useWordGame from '../hooks/useWordGame';
 
 const BoardArea = styled.div`
   display: flex;
@@ -23,7 +23,7 @@ const Board = styled.div`
 
 export default function WordBoard() {
   const { getTriedWord, randomWord } = useWords();
-  const { startNewGame, wordTries, setGameStatus } = useGame();
+  const { startNewGame, wordGame } = useWordGame();
   const { addValueOnRanking } = useRanking();
   const MAX_TRIES = 6;
 
@@ -33,16 +33,16 @@ export default function WordBoard() {
 
   useEffect(() => {
     const verifyGameStatus = () => {
-      if (wordTries.length === MAX_TRIES && wordTries[5] !== randomWord) {
-        addValueOnRanking(wordTries);
-        setGameStatus('lose');
-      } else if (wordTries.includes(randomWord)) {
-        addValueOnRanking(wordTries);
-        setGameStatus('win');
+      if (wordGame.tries.length === MAX_TRIES && wordGame.tries[5] !== randomWord) {
+        addValueOnRanking(wordGame.tries);
+        // setGameStatus('lose');
+      } else if (wordGame.tries.includes(randomWord)) {
+        addValueOnRanking(wordGame.tries);
+        // setGameStatus('win');
       }
     };
     verifyGameStatus();
-  }, [wordTries]);
+  }, [wordGame.tries]);
 
   return (
     <BoardArea>
