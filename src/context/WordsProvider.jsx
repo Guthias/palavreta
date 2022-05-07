@@ -1,10 +1,10 @@
 import React, {
-  createContext, useState, useMemo, useContext, useReducer,
+  createContext, useState, useMemo, useContext, useReducer, useEffect,
 } from 'react';
 import { node } from 'prop-types';
 import wordGameReducer from './wordGameReducer';
 import wordList from '../data/wordlist';
-import { getLocalstoage } from '../helpers/localStorage';
+import { setLocalStorage, getLocalstoage } from '../helpers/localStorage';
 
 export const WordsContext = createContext();
 
@@ -43,6 +43,13 @@ export default function WordsProvider({ children }) {
       dispatch,
     }
   ));
+
+  useEffect(() => {
+    const saveOnLocalStorage = () => {
+      setLocalStorage('game', wordGame);
+    };
+    saveOnLocalStorage();
+  }, [wordGame]);
 
   return (
     <WordsContext.Provider value={providerValues}>
